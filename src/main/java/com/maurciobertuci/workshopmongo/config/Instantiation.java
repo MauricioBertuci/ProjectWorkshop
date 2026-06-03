@@ -4,13 +4,13 @@ import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 import com.maurciobertuci.workshopmongo.domain.User;
 import com.maurciobertuci.workshopmongo.repository.UserRepository;
 
-@Component
-public class DataInitializer implements CommandLineRunner {
+@Configuration
+public class Instantiation implements CommandLineRunner {
 
     @Autowired
     private UserRepository userRepository;
@@ -18,7 +18,7 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Limpar dados existentes (opcional - remova se quiser preservar)
-        userRepository.deleteAll();
+        // userRepository.deleteAll();
         
         // Inserir usuários de teste
         User user1 = new User(null, "Maria Silva", "maria@email.com");
