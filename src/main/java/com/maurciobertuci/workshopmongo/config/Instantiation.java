@@ -1,16 +1,17 @@
 package com.maurciobertuci.workshopmongo.config;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
-import java.text.SimpleDateFormat;
-import java.util.TimeZone;
 
-import com.maurciobertuci.workshopmongo.dto.AuthorDTO;
-import com.maurciobertuci.workshopmongo.domain.User;
 import com.maurciobertuci.workshopmongo.domain.Post;
+import com.maurciobertuci.workshopmongo.domain.User;
+import com.maurciobertuci.workshopmongo.dto.AuthorDTO;
+import com.maurciobertuci.workshopmongo.dto.CommentDTO;
 import com.maurciobertuci.workshopmongo.repository.PostRepository;
 import com.maurciobertuci.workshopmongo.repository.UserRepository;
 
@@ -47,6 +48,15 @@ public class Instantiation implements CommandLineRunner {
 
         user1.getPosts().addAll(Arrays.asList(post1, post2));
         userRepository.save(user1);
+
+        CommentDTO comment1 = new CommentDTO("Boa viagem mano!", sdf.parse("01/01/2023"), new AuthorDTO(user2));
+        CommentDTO comment2 = new CommentDTO("Aproveite muito!", sdf.parse("01/01/2023"), new AuthorDTO(user3));
+        CommentDTO comment3 = new CommentDTO("Tenha um ótimo dia!", sdf.parse("01/01/2023"), new AuthorDTO(user2));
+
+        post1.getComments().addAll(Arrays.asList(comment1, comment2));
+        post2.getComments().addAll(Arrays.asList(comment3));
+
+        postRepository.saveAll(Arrays.asList(post1, post2));
 
         System.out.println("✓ Dados inicializados com sucesso!");
         System.out.println("✓ Total de usuários: " + userRepository.count());
