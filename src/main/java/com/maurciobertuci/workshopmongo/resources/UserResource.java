@@ -50,13 +50,13 @@ public class UserResource {
     }
 
     // atualizar um usuário existente
-    // @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    // public ResponseEntity<Void> update(@PathVariable String id, @RequestBody UserDTO objDto) {
-    //     User obj = service.fromDTO(objDto);
-    //     obj.setId(id);
-    //     obj = service.update(obj);
-    //     return ResponseEntity.noContent().build();
-    // }
+    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
+    public ResponseEntity<Void> update(@RequestBody UserDTO objDto, @PathVariable String id) {
+        User obj = service.fromDTO(objDto);
+        obj.setId(id);  
+        service.update(obj);
+        return ResponseEntity.noContent().build();
+    }
 
     // deletar um usuário
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
