@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
+import com.maurciobertuci.workshopmongo.dto.AuthorDTO;
 import com.maurciobertuci.workshopmongo.domain.User;
 import com.maurciobertuci.workshopmongo.domain.Post;
 import com.maurciobertuci.workshopmongo.repository.PostRepository;
@@ -37,11 +38,11 @@ public class Instantiation implements CommandLineRunner {
         User user2 = new User(null, "João Santos", "joao@email.com");
         User user3 = new User(null, "Ana Costa", "ana@email.com");
         
-        
-        Post post1 = new Post(null, sdf.parse("01/01/2023"), "Partiu viagem", "Vou viajar para São Paulo. Abraços!", user1);
-        Post post2 = new Post(null, sdf.parse("01/01/2023"), "Bom dia", "Acordei feliz hoje!", user1);
-        
         userRepository.saveAll(Arrays.asList(user1, user2, user3));
+        
+        Post post1 = new Post(null, sdf.parse("01/01/2023"), "Partiu viagem", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(user1));
+        Post post2 = new Post(null, sdf.parse("01/01/2023"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(user1));
+        
         postRepository.saveAll(Arrays.asList(post1, post2));
 
         System.out.println("✓ Dados inicializados com sucesso!");
