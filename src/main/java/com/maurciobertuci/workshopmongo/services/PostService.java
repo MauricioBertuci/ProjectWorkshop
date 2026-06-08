@@ -10,6 +10,7 @@ import com.maurciobertuci.workshopmongo.exception.ObjectNotFoundException;
 import com.maurciobertuci.workshopmongo.repository.PostRepository;
 
 
+
 @Service
 public class PostService {
 
@@ -22,7 +23,7 @@ public class PostService {
     }
 
     public List<Post> findByTitle(String title){
-        return repo.findByTitleContainingIgnoreCase(title);
+        return repo.searchTitle(title);
     }
 
 }
